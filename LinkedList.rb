@@ -32,8 +32,23 @@ class LinkedList
     end
   end
 
+  def size
+    counter = 0
+    temp = head
+    if head.nil?
+      return 0
+    elsif head.next_node.nil?
+      return 1
+    else
+      while temp.next_node != nil do 
+        counter += 1
+        temp = temp.next_node
+      end
+      counter += 1
+      return counter
+    end
+  end
+
 end
 li = LinkedList.new
-li.prepend(4)
-li.append(5)
-li.append(6)
+puts li.size
