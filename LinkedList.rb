@@ -49,6 +49,11 @@ class LinkedList
     end
   end
 
+  def head
+     return @head
+  end
+
 end
 li = LinkedList.new
-puts li.size
+li.append(2)
+puts li.head
