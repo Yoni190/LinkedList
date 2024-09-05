@@ -103,4 +103,15 @@ class LinkedList
     return nil
   end
 
+  def to_s
+    list = ""
+    temp = head
+    while temp != nil
+      list += "(#{temp.value}) -> "
+      temp = temp.next_node
+    end
+    list += "nil"
+    return list
+  end
 end
+li = LinkedList.new
