@@ -1,7 +1,7 @@
 require_relative 'node'
 
 class LinkedList
-  attr_accessor :head
+  attr_accessor :head, :tail
   def initialize
     self.head = nil
   end
@@ -53,7 +53,17 @@ class LinkedList
      return @head
   end
 
+  def tail
+    @tail = head
+    while @tail.next_node != nil 
+      @tail = @tail.next_node
+    end
+    return @tail
+  end
+
 end
 li = LinkedList.new
 li.append(2)
+li.prepend(5)
 puts li.head
+puts li.tail
