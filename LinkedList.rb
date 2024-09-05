@@ -61,9 +61,15 @@ class LinkedList
     return @tail
   end
 
+  def at(index)
+    temp = head
+    i = 0
+    while i < index
+      temp = temp.next_node
+      i += 1
+    end
+    temp
+  end
+
 end
 li = LinkedList.new
-li.append(2)
-li.prepend(5)
-puts li.head
-puts li.tail
