@@ -71,5 +71,12 @@ class LinkedList
     temp
   end
 
+  def pop
+    temp = head
+    while temp.next_node.next_node != nil
+      temp = temp.next_node
+    end
+    temp.next_node = nil
+  end
+
 end
-li = LinkedList.new
