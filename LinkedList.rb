@@ -113,5 +113,22 @@ class LinkedList
     list += "nil"
     return list
   end
+
+  def insert(value, index)
+    temp = head
+    new_node = Node.new(value)
+    counter = 1
+    if index > size
+      puts "Out of bound"
+    elsif index.zero?
+      prepend(value)
+    else
+      while counter !=  index
+        temp = temp.next_node
+        counter += 1
+      end
+      new_node.next_node = temp.next_node
+      temp.next_node = new_node
+    end
+  end
 end
-li = LinkedList.new
