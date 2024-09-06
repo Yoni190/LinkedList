@@ -1,19 +1,18 @@
-require_relative 'node'
+require_relative "node"
 
 class LinkedList
-  attr_accessor :head, :tail
+  attr_accessor :head
+
   def initialize
     self.head = nil
   end
 
   def append(value)
-    if self.head.nil?
+    if head.nil?
       self.head = Node.new(value)
     else
       temp = head
-      while temp.next_node != nil do 
-        temp = temp.next_node 
-      end
+      temp = temp.next_node until temp.next_node.nil?
       current = Node.new(value)
       temp.next_node = current
       current.next_node = nil
@@ -21,10 +20,9 @@ class LinkedList
   end
 
   def prepend(value)
-    
-    if self.head.nil?
+    if head.nil?
       self.head = Node.new(value)
-      self.head.next_node = nil
+      head.next_node = nil
     else
       current = Node.new(value)
       current.next_node = head
@@ -35,30 +33,22 @@ class LinkedList
   def size
     counter = 0
     temp = head
-    if head.nil?
-      return 0
-    elsif head.next_node.nil?
-      return 1
-    else
-      while temp.next_node != nil do 
-        counter += 1
-        temp = temp.next_node
-      end
-      counter += 1
-      return counter
-    end
+    head.nil? ? 0 : count_nodes(temp, counter)
   end
 
-  def head
-     return @head
+  def count_nodes(temp, counter)
+    until temp.next_node.nil?
+      counter += 1
+      temp = temp.next_node
+    end
+    counter += 1
+    counter
   end
 
   def tail
-    @tail = head
-    while @tail.next_node != nil 
-      @tail = @tail.next_node
-    end
-    return @tail
+    tail = head
+    tail = tail.next_node until tail.next_node.nil?
+    tail
   end
 
   def at(index)
@@ -73,45 +63,41 @@ class LinkedList
 
   def pop
     temp = head
-    while temp.next_node.next_node != nil
-      temp = temp.next_node
-    end
+    temp = temp.next_node until temp.next_node.next_node.nil?
     temp.next_node = nil
   end
 
   def contains?(value)
     temp = head
-    while temp != nil
-      if temp.value == value
-        return true
-      end
+    until temp.nil?
+      return true if temp.value == value
+
       temp = temp.next_node
     end
-    return false
+    false
   end
 
   def find(value)
     temp = head
     counter = 0
-    while temp != nil
-      if temp.value == value
-        return counter
-      end
+    until temp.nil?
+      return counter if temp.value == value
+
       temp = temp.next_node
       counter += 1
     end
-    return nil
+    nil
   end
 
   def to_s
     list = ""
     temp = head
-    while temp != nil
+    until temp.nil?
       list += "(#{temp.value}) -> "
       temp = temp.next_node
     end
     list += "nil"
-    return list
+    list
   end
 
   def insert(value, index)
@@ -123,7 +109,7 @@ class LinkedList
     elsif index.zero?
       prepend(value)
     else
-      while counter !=  index
+      while counter != index
         temp = temp.next_node
         counter += 1
       end
